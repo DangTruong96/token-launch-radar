@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Token Launch Radar</title>
+  <link rel="stylesheet" href="app.css">
+  <script src="../data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <div class="identity"><span class="radar-mark" aria-hidden="true"><i></i></span><div><p class="eyebrow">Independent research / 01</p><h1>Token Launch Radar</h1></div></div>
+      <div class="snapshot"><span class="status-dot"></span> Snapshot <time id="as-of">—</time><span class="offline">OFFLINE DATASET</span></div>
+    </header>
+    <section class="stats" aria-label="Snapshot statistics" id="stats"></section>
+    <section class="model-panel" aria-labelledby="model-title">
+      <div><p class="eyebrow">The methodology</p><h2 id="model-title">How the value model works</h2><p>What might today’s locked capital imply at a comparable token valuation?</p></div>
+      <div class="model-copy"><p class="formula">TVL <b>×</b> category multiple <b>×</b> growth <b>×</b> age <b>×</b> breadth</p><p>The category multiple starts with the median market-cap/TVL of already-tokenised peers in the same category, derived from this snapshot. It is blended with the global median according to peer count; categories without peers use the global median. The model then adjusts for 7-day TVL change, years running with no token (using tracked age), and number of chains.</p><p class="estimate-note">These are this entry’s own estimates, not predictions that a token will launch or guarantees of rewards.</p><details><summary>Inspect factor rules</summary><div id="factor-rules"></div></details></div>
+    </section>
+    <section class="board" aria-labelledby="board-title">
+      <div class="board-heading"><div><p class="eyebrow">Opportunity scanner</p><h2 id="board-title">The radar board <span id="board-count"></span></h2></div><span class="hint">Select a protocol to inspect its signal ↗</span></div>
+      <form class="controls" role="search" onsubmit="return false">
+        <label class="search">Protocol name<input id="search" type="search" placeholder="Search protocols…" autocomplete="off"></label>
+        <label>Category<select id="category"><option value="">All categories</option></select></label>
+        <label>Chain<select id="chain"><option value="">All chains</option></select></label>
+        <label class="toggle"><input id="watchlist" type="checkbox"><span>Watchlist only</span></label>
+      </form>
+      <p id="results" class="results" role="status" aria-live="polite"></p>
+      <div class="table-wrap"><table><caption class="sr-only">Protocol valuation estimates. Use column buttons to sort and protocol buttons to open details.</caption><thead><tr><th scope="col">Rank</th><th scope="col">Protocol / category</th><th scope="col" class="numeric">Chains</th><th scope="col" class="numeric" data-sort="tvl_usd"><button type="button">TVL <span></span></button></th><th scope="col" class="numeric" data-sort="change_7d"><button type="button">7d change <span></span></button></th><th scope="col" class="numeric" data-sort="age_years"><button type="button">Age / yrs <span></span></button></th><th scope="col" class="numeric">Multiple</th><th scope="col" class="numeric" data-sort="implied_value_usd"><button type="button">Implied value <span></span></button></th></tr></thead><tbody id="rows"></tbody></table></div>
+      <div class="board-bottom"><span>USD · snapshot estimates</span><button id="show-more" type="button">Show 50 more ↓</button><span>Click column labels to sort</span></div>
+    </section>
+    <footer><span>Source: DefiLlama snapshot · <span id="footer-date"></span></span><span>Values are model estimates. Token issuance is uncertain.</span></footer>
+    <p id="error" role="alert" hidden></p>
+  </main>
+  <dialog id="detail" aria-labelledby="detail-title"><div class="drawer-top"><span class="eyebrow">Protocol intelligence</span><button id="close-detail" type="button" aria-label="Close protocol details">Close ×</button></div><div id="detail-content"></div></dialog>
+</body>
+</html>
